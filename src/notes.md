@@ -1,4 +1,5 @@
-# Lab 05 Notes
+# Notes
 
-This project demonstrates Markdown-to-HTML builds using Node.js.
-- A fourth note
+- Make rebuilds only what changed
+- Timestamps decide, not contents
+- A build tool owns the *recipe*; Make owns the *order*
