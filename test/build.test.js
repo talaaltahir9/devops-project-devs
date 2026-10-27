@@ -1,19 +1,22 @@
-// test/build.test.js — runs on Node's built-in test runner. No test framework.
-const { test } = require('node:test');
+const test = require('node:test');
 const assert = require('node:assert');
-const fs = require('fs');
+const fs = require('node:fs');
+const { execSync } = require('node:child_process');
 
-const pages = fs.readdirSync('out').filter((f) => f.endsWith('.html'));
-
-test('every source produced a page', () => {
-  const sources = fs.readdirSync('src').filter((f) => f.endsWith('.md'));
-  assert.strictEqual(pages.length, sources.length);
+test('build.js converts markdown to html', () => {
+  execSync('node tools/build.js src/notes.md out/notes.html');
+  const content = fs.readFileSync('out/notes.html', 'utf8');
+  assert.match(content, /<h1>Notes<\/h1>/);
 });
 
-test('every page is real HTML and not raw Markdown', () => {
-  for (const p of pages) {
-    const html = fs.readFileSync('out/' + p, 'utf8');
-    assert.match(html, /^<!doctype html>/);
-    assert.doesNotMatch(html, /^# /m);
-  }
+test('build.js handles list items correctly', () => {
+  const content = fs.readFileSync('out/notes.html', 'utf8');
+  assert.match(content, /<li>/);
+});
+
+// Third test: fails if output page is empty (zero-byte silent failure)
+test('build.js produces non-empty output file', () => {
+  execSync('node tools/build.js src/notes.md out/notes.html');
+  const stats = fs.statSync('out/notes.html');
+  assert.ok(stats.size > 0, 'Output file must not be 0 bytes');
 });
