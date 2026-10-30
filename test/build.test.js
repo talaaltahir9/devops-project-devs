@@ -20,3 +20,9 @@ test('build.js produces non-empty output file', () => {
   const stats = fs.statSync('out/notes.html');
   assert.ok(stats.size > 0, 'Output file must not be 0 bytes');
 });
+test('each page title is its source filename', () => {
+  for (const p of pages) {
+    const html = fs.readFileSync('out/' + p, 'utf8');
+    assert.ok(html.includes('<title>' + p.replace('.html', '') + '</title>'));
+  }
+});
