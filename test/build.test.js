@@ -20,5 +20,3 @@ test('build.js produces non-empty output file', () => {
   const stats = fs.statSync('out/notes.html');
   assert.ok(stats.size > 0, 'Output file must not be 0 bytes');
 });
-
-test('this always fails', () => assert.ok(false));
