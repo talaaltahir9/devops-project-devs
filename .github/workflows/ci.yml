@@ -6,6 +6,10 @@ on:
   pull_request:
   schedule:
     - cron: '0 2 * * *' # 02:00 UTC, nightly
+
+permissions:
+  contents: read
+
 jobs:
   build:
     name: build-and-test
