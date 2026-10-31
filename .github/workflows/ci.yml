@@ -1,10 +1,8 @@
 name: CI
-
 on:
   push:
     branches: [main]
   pull_request:
-
 jobs:
   build:
     name: build-and-test
@@ -16,3 +14,4 @@ jobs:
           node-version: '22'
       - name: Build, test and package
         run: make ci
+
