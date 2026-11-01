@@ -26,10 +26,6 @@ test('build.js produces non-empty output file', () => {
 test('each page title is its source filename', () => {
   for (const p of pages) {
     const html = fs.readFileSync('out/' + p, 'utf8');
-    const titleMatch = html.match(/<title>([^<]+)<\/title>/);
-    assert.ok(titleMatch, `Missing title tag in ${p}`);
-    const expectedSlug = p.replace('.html', '');
-    const titleSlug = titleMatch[1].trim().toLowerCase().replace(/\s+/g, '-');
-    assert.equal(titleSlug, expectedSlug);
+    assert.ok(html.includes('<title>' + p.replace('.html', '') + '</title>'));
   }
 });
