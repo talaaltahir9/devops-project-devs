@@ -14,7 +14,8 @@
   "license": "ISC",
   "description": "Renders the course Markdown sources into HTML pages.",
   "dependencies": {
-    "markdown-it": "^15.0.3"
+  "markdown-it": "^15.0.3",
+  "js-yaml": "^4.1.0"
   },
   "bin": {
     "devops-build": "tools/build.js"
