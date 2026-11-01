@@ -6,6 +6,11 @@ const pages = fs.readdirSync('src')
   .filter((name) => name.endsWith('.md'))
   .map((name) => name.replace(/\.md$/, '.html'));
 
+const pages = fs
+  .readdirSync('src')
+  .filter((name) => name.endsWith('.md'))
+  .map((name) => name.replace('.md', '.html'));
+
 test('build.js converts markdown to html', () => {
   execSync('node tools/build.js src/notes.md out/notes.html');
   const content = fs.readFileSync('out/notes.html', 'utf8');
