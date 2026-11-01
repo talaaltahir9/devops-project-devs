@@ -2,6 +2,9 @@ const test = require('node:test');
 const assert = require('node:assert');
 const fs = require('node:fs');
 const { execSync } = require('node:child_process');
+const pages = fs.readdirSync('src')
+  .filter((name) => name.endsWith('.md'))
+  .map((name) => name.replace(/\.md$/, '.html'));
 
 test('build.js converts markdown to html', () => {
   execSync('node tools/build.js src/notes.md out/notes.html');
