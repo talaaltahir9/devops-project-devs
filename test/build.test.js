@@ -20,3 +20,15 @@ test('build.js produces non-empty output file', () => {
   const stats = fs.statSync('out/notes.html');
   assert.ok(stats.size > 0, 'Output file must not be 0 bytes');
 });
+
+test('every page names the course', () => {
+  for (const p of pages) {
+    assert.match(fs.readFileSync('out/' + p, 'utf8'), /DevOps/);
+  }
+});
+
+test('every page names the course', () => {
+  for (const p of pages) {
+    assert.match(fs.readFileSync('out/' + p, 'utf8'), /DevOps/);
+  }
+});
